@@ -1,9 +1,25 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { TarjetaCredito } from '../models/TarjetaCredito';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TarjetaService {
 
-  constructor() { }
+  constructor(private firebase: AngularFirestore) { }
+
+  guardarTarjeta(tarjeta: TarjetaCredito): Promise <any>
+  {
+    return this.firebase.collection('tarjetas').add(tarjeta);
+  }
+
+  listarTarjetas():Observable<any>
+  {
+    return this.firebase.collection('tarjetas').snapshotChanges();
+  }
+  eliminarTarjeta(id:string){
+    return this.firebase.collection('tarjetas').doc(id).delete(); 
+  }
 }
