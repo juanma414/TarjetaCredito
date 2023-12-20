@@ -38,4 +38,8 @@ export class ListarTarjetaComponent implements OnInit{
 
     })
   }
+
+  editarTarjeta(tarjeta:any){
+
+  }
 }
